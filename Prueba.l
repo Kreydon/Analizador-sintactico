@@ -1,34 +1,34 @@
 %{
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <vector>
-using namespace std;
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string>
+    #include <vector>
+    using namespace std;
 
-int errores = 0;
-vector<string> ids;
+    int errores = 0;
+    vector<string> ids;
 
-int idexiste(string id){
-    for(int i = 0; i < ids.size(); i++){
-        if(ids.at(i) == id){
-            return i;
+    int idexiste(string id){
+        for(int i = 0; i < ids.size(); i++){
+            if(ids.at(i) == id){
+                return i;
+            }
         }
+        return -1;
     }
-    return -1;
-}
 
-void add_id(string id) {
-    ids.insert(ids.end(), id);
-}
+    void add_id(string id) {
+        ids.insert(ids.end(), id);
+    }
+
 %}
-
-%start CREATE_TABLE_STATEMENT
 
 /*TOKENS*/
 
 /*COMANDOS*/
-CREATETABLE "CREATE TABLE"|"CREATE Table"|"Create table"
-DROPTABLE "DROP TABLE"|"DROP table"
+CREATE "CREATE"
+DROP "DROP"
+TABLE "TABLE"
 SELECT "SELECT"
 WHERE "WHERE"
 GROUPBY "GROUP BY"
@@ -92,28 +92,18 @@ CONST_CADENA \"[^\n"]*\"|\'[^\n']*\'
 
 ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 
-%x DROP_TABLE_STATEMENT
-%x SELECT_STATEMENT
-%x WHERE_STATEMENT
-%x GROUP_BY_STATEMENT
-%x ORDER_BY_STATEMENT
-%x INSERT_STATEMENT
-%x DELETE_STATEMENT
-%x UPDATE_STATEMENT
-
-/*REGLAS LÉXICAS*/
-
+/*REGLAS*/
 %%
-
-{CREATETABLE}    {printf("CREATE TABLE ");}
-{DROPTABLE}      {printf("DROP TABLE "); BEGIN DROP_TABLE_STATEMENT;}
-{SELECT}         {printf("SELECT "); BEGIN SELECT_STATEMENT;}
-{WHERE}          {printf("WHERE "); BEGIN WHERE_STATEMENT;}
-{GROUPBY}        {printf("GROUP BY "); BEGIN GROUP_BY_STATEMENT;}
-{ORDERBY}        {printf("ORDER BY "); BEGIN ORDER_BY_STATEMENT;}
-{INSERT}         {printf("INSERT "); BEGIN INSERT_STATEMENT;}
-{DELETE}         {printf("DELETE "); BEGIN DELETE_STATEMENT;}
-{UPDATE}         {printf("UPDATE "); BEGIN UPDATE_STATEMENT;}
+{CREATE}    {printf("CREATE ");}
+{DROP}      {printf("DROP ");}
+{TABLE}          {printf("TABLE ")}
+{SELECT}         {printf("SELECT ");}
+{WHERE}          {printf("WHERE ");}
+{GROUPBY}        {printf("GROUP BY ");}
+{ORDERBY}        {printf("ORDER BY ");}
+{INSERT}         {printf("INSERT ");}
+{DELETE}         {printf("DELETE ");}
+{UPDATE}         {printf("UPDATE ");}
 {MAX}            {printf("MAX ");}
 {MIN}            {printf("MIN ");}
 {AVG}            {printf("AVG ");}
@@ -156,57 +146,17 @@ ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 {CONST_CADENA}   {printf("%s",yytext);}
 
 {ERROR_LEXICO}          {printf("%s ", yytext);}
-
-
 %%
 
-/*REGLAS_SINTÁCTICAS*/
+/*CODIGO*/
+int yywrap(){return 1;}
 
-
-CREATE_TABLE_STATEMENT: CREATE TABLE IDENTIFICADOR PARENTA IDENTIFICADORES_CREATE_STATEMENT PARENTC PUNTOYCOMA
-    {
-        printf("CREATE TABLE statement recognized.\n");
-        BEGIN 0;
-    }
-    | error PUNTOYCOMA
-    {
-        printf("Syntax error in CREATE TABLE statement. Continuing from the next semicolon.\n");
-        yyerrok;
-    }
-    | error
-    {
-        printf("Syntax error in CREATE TABLE statement. Skipping to the next statement.\n");
-        BEGIN 0;
-    };
-
-DROP_TABLE_STATEMENT: DROP TABLE IDENTIFICADOR PUNTOYCOMA
-    {
-        printf("DROP TABLE statement recognized.\n");
-        BEGIN 0;
-    }
-    | error PUNTOYCOMA
-    {
-        printf("Syntax error in DROP TABLE statement. Continuing from the next semicolon.\n");
-        yyerrok;
-    }
-    | error
-    {
-        printf("Syntax error in DROP TABLE statement. Skipping to the next statement.\n");
-        BEGIN 0;
-    };
-
-
-int yywrap() { return 1; }
-
-int main(int argc, char **argv) {
+int main( int argc, char **argv ){
     ++argv, --argc;
-    if (argc > 0)
-        yyin = fopen(argv[0], "r");
+    if ( argc > 0 )
+        yyin = fopen( argv[0], "r" );
     else
         yyin = stdin;
 
-    BEGIN CREATE_TABLE_STATEMENT
-
-    yyparse();
-    return 0;
+    yylex();
 }

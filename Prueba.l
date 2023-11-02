@@ -22,6 +22,8 @@ void add_id(string id) {
 }
 %}
 
+%start CREATE_TABLE_STATEMENT
+
 /*TOKENS*/
 
 /*COMANDOS*/
@@ -90,16 +92,25 @@ CONST_CADENA \"[^\n"]*\"|\'[^\n']*\'
 
 ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 
+%x DROP_TABLE_STATEMENT
+%x SELECT_STATEMENT
+%x WHERE_STATEMENT
+%x GROUP_BY_STATEMENT
+%x ORDER_BY_STATEMENT
+%x INSERT_STATEMENT
+%x DELETE_STATEMENT
+%x UPDATE_STATEMENT
+
 /*REGLAS LÉXICAS*/
 
 %%
 
-{CREATETABLE}    {printf("CREATE TABLE "); BEGIN CREATE_TABLE;}
-{DROPTABLE}      {printf("DROP TABLE "); BEGIN DROP_TABLE;}
+{CREATETABLE}    {printf("CREATE TABLE ");}
+{DROPTABLE}      {printf("DROP TABLE "); BEGIN DROP_TABLE_STATEMENT;}
 {SELECT}         {printf("SELECT "); BEGIN SELECT_STATEMENT;}
-{WHERE}          {printf("WHERE "); BEGIN WHERE_CLAUSE;}
-{GROUPBY}        {printf("GROUP BY "); BEGIN GROUP_BY;}
-{ORDERBY}        {printf("ORDER BY "); BEGIN ORDER_BY;}
+{WHERE}          {printf("WHERE "); BEGIN WHERE_STATEMENT;}
+{GROUPBY}        {printf("GROUP BY "); BEGIN GROUP_BY_STATEMENT;}
+{ORDERBY}        {printf("ORDER BY "); BEGIN ORDER_BY_STATEMENT;}
 {INSERT}         {printf("INSERT "); BEGIN INSERT_STATEMENT;}
 {DELETE}         {printf("DELETE "); BEGIN DELETE_STATEMENT;}
 {UPDATE}         {printf("UPDATE "); BEGIN UPDATE_STATEMENT;}
@@ -131,7 +142,7 @@ ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 {PARENTA}        {printf("%s ",yytext);}
 {PARENTC}        {printf("%s ",yytext);}
 {COMA}           {printf("%s ",yytext);}
-{PUNTOYCOMA}     {printf("%s "); BEGIN 0;}  // Vuelve al estado inicial
+{PUNTOYCOMA}     {printf("%s ",yytext); BEGIN 0;}  // Vuelve al estado inicial
 {ASIGNACION}     {printf("%s ",yytext);}
 [^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("%s ",yytext);}
 {CONST_ENTERO}   {printf("%s ",yytext);}
@@ -145,17 +156,14 @@ ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 {CONST_CADENA}   {printf("%s",yytext);}
 
 {ERROR_LEXICO}          {printf("%s ", yytext);}
-{ANY}            {;}
 
 
 %%
 
 /*REGLAS_SINTÁCTICAS*/
 
-%start sql_parser
 
-%%
-create_table_statement: CREATE TABLE IDENTIFICADOR PARENTA IDENTIFICADORES_CREATE_STATEMENT PARENTC PUNTOYCOMA
+CREATE_TABLE_STATEMENT: CREATE TABLE IDENTIFICADOR PARENTA IDENTIFICADORES_CREATE_STATEMENT PARENTC PUNTOYCOMA
     {
         printf("CREATE TABLE statement recognized.\n");
         BEGIN 0;
@@ -171,7 +179,7 @@ create_table_statement: CREATE TABLE IDENTIFICADOR PARENTA IDENTIFICADORES_CREAT
         BEGIN 0;
     };
 
-drop_table_statement: DROP TABLE IDENTIFICADOR PUNTOYCOMA
+DROP_TABLE_STATEMENT: DROP TABLE IDENTIFICADOR PUNTOYCOMA
     {
         printf("DROP TABLE statement recognized.\n");
         BEGIN 0;
@@ -188,8 +196,6 @@ drop_table_statement: DROP TABLE IDENTIFICADOR PUNTOYCOMA
     };
 
 
-%%
-
 int yywrap() { return 1; }
 
 int main(int argc, char **argv) {
@@ -198,6 +204,8 @@ int main(int argc, char **argv) {
         yyin = fopen(argv[0], "r");
     else
         yyin = stdin;
+
+    BEGIN CREATE_TABLE_STATEMENT
 
     yyparse();
     return 0;

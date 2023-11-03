@@ -96,7 +96,7 @@ ERROR_LEXICO {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 %%
 {CREATE}    {printf("CREATE ");}
 {DROP}      {printf("DROP ");}
-{TABLE}          {printf("TABLE ")}
+{TABLE}          {printf("TABLE ");}
 {SELECT}         {printf("SELECT ");}
 {WHERE}          {printf("WHERE ");}
 {GROUPBY}        {printf("GROUP BY ");}

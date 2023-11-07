@@ -62,8 +62,8 @@
 %token CONST_FLOAT
 %token NUMERO
 %token IDENTIFICADOR
-%token IDENTIFICADORES_CREATE_STATEMENT
 %token CONST_CADENA
+%token ERROR
 
 %%
 
@@ -77,7 +77,7 @@ comandos: creacion_tabla { numLinea++; }
         | seleccion { numLinea++; }
         | error PUNTOYCOMA { error_lineas.push_back(numLinea++); }
 
-creacion_tabla: CREATETABLE IDENTIFICADOR PARENTA IDENTIFICADORES_CREATE_STATEMENT PARENTC PUNTOYCOMA;
+creacion_tabla: CREATETABLE IDENTIFICADOR PARENTA campos PARENTC PUNTOYCOMA;
 campos: campo campos_;
 campos_: | COMA campos;
 campo: IDENTIFICADOR tipoDato dato | IDENTIFICADOR tipoDato;

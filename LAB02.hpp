@@ -104,8 +104,8 @@ extern int yydebug;
     CONST_FLOAT = 305,             /* CONST_FLOAT  */
     NUMERO = 306,                  /* NUMERO  */
     IDENTIFICADOR = 307,           /* IDENTIFICADOR  */
-    IDENTIFICADORES_CREATE_STATEMENT = 308, /* IDENTIFICADORES_CREATE_STATEMENT  */
-    CONST_CADENA = 309             /* CONST_CADENA  */
+    CONST_CADENA = 308,            /* CONST_CADENA  */
+    ERROR = 309                    /* ERROR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -164,8 +164,8 @@ extern int yydebug;
 #define CONST_FLOAT 305
 #define NUMERO 306
 #define IDENTIFICADOR 307
-#define IDENTIFICADORES_CREATE_STATEMENT 308
-#define CONST_CADENA 309
+#define CONST_CADENA 308
+#define ERROR 309
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

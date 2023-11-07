@@ -95,9 +95,7 @@ CONST_ENTERO (-?[1-9][0-9]*)|0
 CONST_FLOAT {DIGITO}+{PUNTO}{DIGITO}+
 NUMERO {CONST_ENTERO}|{CONST_FLOAT}
 IDENTIFICADOR {LETRA}({LETRA}|{NUMERO}|{GUIIONES})*
-IDENTIFICADORES_CREATE_STATEMENT ({IDENTIFICADOR}{TIPO_DATO}{PARENTA}{NUMERO}{PARENTC})+
 CONST_CADENA \"[^\n"]*\"|\'[^\n']*\'
-
 ERROR {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 
 /*REGLAS*/
@@ -151,6 +149,6 @@ ERROR {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
                   }
                   printf("%s ", yytext); return (IDENTIFICADOR);}
 {CONST_CADENA}   {printf("%s",yytext); return (CONST_CADENA);}
-
 {ERROR}          {printf("%s ", yytext); return (ERROR);}
+
 %%

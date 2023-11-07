@@ -3,6 +3,12 @@
     #include <stdlib.h>
     #include <string>
     #include <vector>
+    #include <iostream>
+    #include <fstream>
+    #include <algorithm>
+    #include <map>
+    #include "LAB02.hpp"
+
     using namespace std;
 
     int errores = 0;
@@ -22,6 +28,9 @@
     }
 
 %}
+
+%option case-insensitive
+%option noyywrap
 
 /*TOKENS*/
 
@@ -93,68 +102,55 @@ ERROR {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 
 /*REGLAS*/
 %%
-{CREATETABLE}    {printf("CREATE TABLE ");}
-{DROPTABLE}      {printf("DROP TABLE ");}
-{SELECT}         {printf("SELECT ");}
-{WHERE}          {printf("WHERE ");}
-{GROUPBY}        {printf("GROUP BY ");}
-{ORDERBY}        {printf("ORDER BY ");}
-{INSERT}         {printf("INSERT ");}
-{DELETE}         {printf("DELETE ");}
-{UPDATE}         {printf("UPDATE ");}
-{MAX}            {printf("MAX ");}
-{MIN}            {printf("MIN ");}
-{AVG}            {printf("AVG ");}
-{COUNT}          {printf("COUNT ");}
-{INTO}           {printf("INTO ");}
-{VALUES}         {printf("VALUES ");}
-{FROM}           {printf("FROM ");}
-{SET}            {printf("SET ");}
-{ASC}            {printf("ASC ");}
-{DESC}           {printf("DESC ");}
-{DATO_INTEGER}   {printf("INTEGER ");}
-{DATO_DECIMAL}   {printf("DECIMAL ");}
-{DATO_VARCHAR}   {printf("VARCHAR ");}
-{SUMA}           {printf("%s ",yytext);}
-{RESTA}          {printf("%s ",yytext);}
-{MULT}           {printf("%s ",yytext);}
-{DIV}            {printf("%s ",yytext);}
-{IGUALDAD}       {printf("%s ",yytext);}
-{DIFERENCIA}     {printf("%s ",yytext);}
-{MAYORQ}         {printf("%s ",yytext);}
-{MENORQ}         {printf("%s ",yytext);}
-{MAYORIQ}        {printf("%s ",yytext);}
-{MENORIQ}        {printf("%s ",yytext);}
-{AND}            {printf("%s ",yytext);}
-{OR}             {printf("%s ",yytext);}
-{PARENTA}        {printf("%s ",yytext);}
-{PARENTC}        {printf("%s ",yytext);}
-{COMA}           {printf("%s ",yytext);}
-{PUNTOYCOMA}     {printf("%s ",yytext); BEGIN 0;}  // Vuelve al estado inicial
-{ASIGNACION}     {printf("%s ",yytext);}
-[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("%s ",yytext);}
-{CONST_ENTERO}   {printf("%s ",yytext);}
-{CONST_FLOAT}    {printf("%s ",yytext);}
+{CREATETABLE}    {printf("CREATE TABLE "); return (CREATETABLE);}
+{DROPTABLE}      {printf("DROP TABLE "); return (DROPTABLE);}
+{SELECT}         {printf("SELECT "); return (SELECT);}
+{WHERE}          {printf("WHERE "); return (WHERE);}
+{GROUPBY}        {printf("GROUP BY "); return (GROUPBY);}
+{ORDERBY}        {printf("ORDER BY "); return (ORDERBY);}
+{INSERT}         {printf("INSERT "); return (INSERT);}
+{DELETE}         {printf("DELETE "); return (DELETE);}
+{UPDATE}         {printf("UPDATE "); return (UPDATE);}
+{MAX}            {printf("MAX "); return (MAX);}
+{MIN}            {printf("MIN "); return (MIN);}
+{AVG}            {printf("AVG "); return (AVG);}
+{COUNT}          {printf("COUNT "); return (COUNT);}
+{INTO}           {printf("INTO "); return (INTO);}
+{VALUES}         {printf("VALUES "); return (VALUES);}
+{FROM}           {printf("FROM "); return (FROM);}
+{SET}            {printf("SET "); return (SET);}
+{ASC}            {printf("ASC "); return (ASC);}
+{DESC}           {printf("DESC "); return (DESC);}
+{DATO_INTEGER}   {printf("INTEGER "); return (DATO_INTEGER);}
+{DATO_DECIMAL}   {printf("DECIMAL "); return (DATO_DECIMAL);}
+{DATO_VARCHAR}   {printf("VARCHAR "); return (DATO_VARCHAR);}
+{SUMA}           {printf("%s ",yytext); return (SUMA);}
+{RESTA}          {printf("%s ",yytext); return (RESTA);}
+{MULT}           {printf("%s ",yytext); return (MULT);}
+{DIV}            {printf("%s ",yytext); return (DIV);}
+{IGUALDAD}       {printf("%s ",yytext); return (IGUALDAD);}
+{DIFERENCIA}     {printf("%s ",yytext); return (DIFERENCIA);}
+{MAYORQ}         {printf("%s ",yytext); return (MAYORQ);}
+{MENORQ}         {printf("%s ",yytext); return (MENORQ);}
+{MAYORIQ}        {printf("%s ",yytext); return (MAYORIQ);}
+{MENORIQ}        {printf("%s ",yytext); return (MENORIQ);}
+{AND}            {printf("%s ",yytext); return (AND);}
+{OR}             {printf("%s ",yytext); return (OR);}
+{PARENTA}        {printf("%s ",yytext); return (PARENTA);}
+{PARENTC}        {printf("%s ",yytext); return (PARENTC);}
+{COMA}           {printf("%s ",yytext); return (COMA);}
+{PUNTOYCOMA}     {printf("%s ",yytext); return (PUNTOYCOMA);}
+{ASIGNACION}     {printf("%s ",yytext); return (ASIGNACION);}
+[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("%s ",yytext); return (ASTERISCO);}
+{CONST_ENTERO}   {printf("%s ",yytext); return (CONST_ENTERO);}
+{CONST_FLOAT}    {printf("%s ",yytext); return (CONST_FLOAT);}
 {IDENTIFICADOR}  {int idtemp = idexiste(yytext);
                   if(idtemp == -1){
                     ids.insert(ids.end(), yytext);
                     idtemp = idexiste(yytext);
                   }
-                  printf("%s ", yytext);}
-{CONST_CADENA}   {printf("%s",yytext);}
+                  printf("%s ", yytext); return (IDENTIFICADOR);}
+{CONST_CADENA}   {printf("%s",yytext); return (CONST_CADENA);}
 
-{ERROR}          {printf("%s ", yytext);}
+{ERROR}          {printf("%s ", yytext); return (ERROR);}
 %%
-
-/*CODIGO*/
-int yywrap(){return 1;}
-
-int main( int argc, char **argv ){
-    ++argv, --argc;
-    if ( argc > 0 )
-        yyin = fopen( argv[0], "r" );
-    else
-        yyin = stdin;
-
-    yylex();
-}

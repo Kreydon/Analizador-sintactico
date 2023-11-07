@@ -1,10 +1,10 @@
-CREATE TABLE  Empleado ( nombre  VARCHAR ( 20 ) ,  cedula  INTEGER ,  salario 
-DECIMAL ( 2 ) ) ;  
-INSERT  INTO  Empleado  VALUES ( 'Juan', 1045268154 ,  12aab ) ; 
-SELECT  FROM  a ; 
-SELECT  nombre ,  MAX ( salario )  FROM  Empleado ; 
-UPDATE  SET  nombre = 'Carlos' FROM  Empleado  WHERE  cedula = 12.5 
-SELECT  *  FROM  Empleado  WHERE  salario < 2000000  ORDER BY  nombre  ASC  .; 
+CREATE TABLE  id1=Empleado parabre=( id2=nombre  VARCHAR parabre=( entero=20 paracierr=) coma=,  id3=cedula  INTEGER coma=,  id4=salario 
+DECIMAL parabre=( entero=2 paracierr=) paracierr=) puntcoma;  
+INSERT  INTO  id1=Empleado  VALUES parabre=( cadena='Juan'coma=, entero=1045268154 coma=,  error=12aab paracierr=) puntcoma; 
+SELECT  FROM  id5=a puntcoma; 
+SELECT  id2=nombre coma=,  MAX parabre=( id4=salario paracierr=)  FROM  id1=Empleado puntcoma; 
+UPDATE  SET  id2=nombre asign== cadena='Carlos' FROM  id1=Empleado  WHERE  id3=cedula asign== decimal=12.5 
+SELECT asterisco= *  FROM  id1=Empleado  WHERE  id4=salario menorq=< entero=2000000  ORDER BY  id2=nombre  ASC error= .; 
 
 Incorrecto
 

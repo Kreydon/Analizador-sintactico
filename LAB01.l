@@ -122,33 +122,33 @@ ERROR {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 {DATO_INTEGER}   {printf("INTEGER "); return (DATO_INTEGER);}
 {DATO_DECIMAL}   {printf("DECIMAL "); return (DATO_DECIMAL);}
 {DATO_VARCHAR}   {printf("VARCHAR "); return (DATO_VARCHAR);}
-{SUMA}           {printf("%s ",yytext); return (SUMA);}
-{RESTA}          {printf("%s ",yytext); return (RESTA);}
-{MULT}           {printf("%s ",yytext); return (MULT);}
-{DIV}            {printf("%s ",yytext); return (DIV);}
-{IGUALDAD}       {printf("%s ",yytext); return (IGUALDAD);}
-{DIFERENCIA}     {printf("%s ",yytext); return (DIFERENCIA);}
-{MAYORQ}         {printf("%s ",yytext); return (MAYORQ);}
-{MENORQ}         {printf("%s ",yytext); return (MENORQ);}
-{MAYORIQ}        {printf("%s ",yytext); return (MAYORIQ);}
-{MENORIQ}        {printf("%s ",yytext); return (MENORIQ);}
-{AND}            {printf("%s ",yytext); return (AND);}
-{OR}             {printf("%s ",yytext); return (OR);}
-{PARENTA}        {printf("%s ",yytext); return (PARENTA);}
-{PARENTC}        {printf("%s ",yytext); return (PARENTC);}
-{COMA}           {printf("%s ",yytext); return (COMA);}
-{PUNTOYCOMA}     {printf("%s ",yytext); return (PUNTOYCOMA);}
-{ASIGNACION}     {printf("%s ",yytext); return (ASIGNACION);}
-[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("%s ",yytext); return (ASTERISCO);}
-{CONST_ENTERO}   {printf("%s ",yytext); return (CONST_ENTERO);}
-{CONST_FLOAT}    {printf("%s ",yytext); return (CONST_FLOAT);}
+{SUMA}           {printf("suma=%s ",yytext); return (SUMA);}
+{RESTA}          {printf("resta=%s ",yytext); return (RESTA);}
+{MULT}           {printf("multiplicación=%s ",yytext); return (MULT);}
+{DIV}            {printf("división=%s ",yytext); return (DIV);}
+{IGUALDAD}       {printf("igualdad=%s ",yytext); return (IGUALDAD);}
+{DIFERENCIA}     {printf("diferencia=%s ",yytext); return (DIFERENCIA);}
+{MAYORQ}         {printf("mayorq=%s ",yytext); return (MAYORQ);}
+{MENORQ}         {printf("menorq=%s ",yytext); return (MENORQ);}
+{MAYORIQ}        {printf("mayorigualq=%s ",yytext); return (MAYORIQ);}
+{MENORIQ}        {printf("menorigualq=%s ",yytext); return (MENORIQ);}
+{AND}            {printf("y=%s ",yytext); return (AND);}
+{OR}             {printf("o=%s ",yytext); return (OR);}
+{PARENTA}        {printf("parabre=%s ",yytext); return (PARENTA);}
+{PARENTC}        {printf("paracierr=%s ",yytext); return (PARENTC);}
+{COMA}           {printf("coma=%s ",yytext); return (COMA);}
+{PUNTOYCOMA}     {printf("puntcoma%s ",yytext); return (PUNTOYCOMA);}
+{ASIGNACION}     {printf("asign=%s ",yytext); return (ASIGNACION);}
+[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("asterisco=%s ",yytext); return (ASTERISCO);}
+{CONST_ENTERO}   {printf("entero=%s ",yytext); return (CONST_ENTERO);}
+{CONST_FLOAT}    {printf("decimal=%s ",yytext); return (CONST_FLOAT);}
 {IDENTIFICADOR}  {int idtemp = idexiste(yytext);
                   if(idtemp == -1){
                     ids.insert(ids.end(), yytext);
                     idtemp = idexiste(yytext);
                   }
-                  printf("%s ", yytext); return (IDENTIFICADOR);}
-{CONST_CADENA}   {printf("%s",yytext); return (CONST_CADENA);}
-{ERROR}          {printf("%s ", yytext); return (ERROR);}
+                  printf("id%d=%s ", idtemp + 1, yytext); return (IDENTIFICADOR);}
+{CONST_CADENA}   {printf("cadena=%s",yytext); return (CONST_CADENA);}
+{ERROR}          {printf("error=%s ", yytext); return (ERROR);}
 
 %%

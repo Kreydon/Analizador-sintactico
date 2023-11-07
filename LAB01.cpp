@@ -1276,103 +1276,103 @@ YY_RULE_SETUP
 case 23:
 YY_RULE_SETUP
 #line 125 "LAB01.l"
-{printf("%s ",yytext); return (SUMA);}
+{printf("suma=%s ",yytext); return (SUMA);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 126 "LAB01.l"
-{printf("%s ",yytext); return (RESTA);}
+{printf("resta=%s ",yytext); return (RESTA);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
 #line 127 "LAB01.l"
-{printf("%s ",yytext); return (MULT);}
+{printf("multiplicación=%s ",yytext); return (MULT);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 128 "LAB01.l"
-{printf("%s ",yytext); return (DIV);}
+{printf("división=%s ",yytext); return (DIV);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 129 "LAB01.l"
-{printf("%s ",yytext); return (IGUALDAD);}
+{printf("igualdad=%s ",yytext); return (IGUALDAD);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 130 "LAB01.l"
-{printf("%s ",yytext); return (DIFERENCIA);}
+{printf("diferencia=%s ",yytext); return (DIFERENCIA);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
 #line 131 "LAB01.l"
-{printf("%s ",yytext); return (MAYORQ);}
+{printf("mayorq=%s ",yytext); return (MAYORQ);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
 #line 132 "LAB01.l"
-{printf("%s ",yytext); return (MENORQ);}
+{printf("menorq=%s ",yytext); return (MENORQ);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
 #line 133 "LAB01.l"
-{printf("%s ",yytext); return (MAYORIQ);}
+{printf("mayorigualq=%s ",yytext); return (MAYORIQ);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
 #line 134 "LAB01.l"
-{printf("%s ",yytext); return (MENORIQ);}
+{printf("menorigualq=%s ",yytext); return (MENORIQ);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
 #line 135 "LAB01.l"
-{printf("%s ",yytext); return (AND);}
+{printf("y=%s ",yytext); return (AND);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
 #line 136 "LAB01.l"
-{printf("%s ",yytext); return (OR);}
+{printf("o=%s ",yytext); return (OR);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
 #line 137 "LAB01.l"
-{printf("%s ",yytext); return (PARENTA);}
+{printf("parabre=%s ",yytext); return (PARENTA);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
 #line 138 "LAB01.l"
-{printf("%s ",yytext); return (PARENTC);}
+{printf("paracierr=%s ",yytext); return (PARENTC);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
 #line 139 "LAB01.l"
-{printf("%s ",yytext); return (COMA);}
+{printf("coma=%s ",yytext); return (COMA);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
 #line 140 "LAB01.l"
-{printf("%s ",yytext); return (PUNTOYCOMA);}
+{printf("puntcoma%s ",yytext); return (PUNTOYCOMA);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
 #line 141 "LAB01.l"
-{printf("%s ",yytext); return (ASIGNACION);}
+{printf("asign=%s ",yytext); return (ASIGNACION);}
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
 #line 142 "LAB01.l"
-{printf("%s ",yytext); return (ASTERISCO);}
+{printf("asterisco=%s ",yytext); return (ASTERISCO);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
 #line 143 "LAB01.l"
-{printf("%s ",yytext); return (CONST_ENTERO);}
+{printf("entero=%s ",yytext); return (CONST_ENTERO);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
 #line 144 "LAB01.l"
-{printf("%s ",yytext); return (CONST_FLOAT);}
+{printf("decimal=%s ",yytext); return (CONST_FLOAT);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
@@ -1382,18 +1382,18 @@ YY_RULE_SETUP
                     ids.insert(ids.end(), yytext);
                     idtemp = idexiste(yytext);
                   }
-                  printf("%s ", yytext); return (IDENTIFICADOR);}
+                  printf("id%d=%s ", idtemp + 1, yytext); return (IDENTIFICADOR);}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
 #line 151 "LAB01.l"
-{printf("%s",yytext); return (CONST_CADENA);}
+{printf("cadena=%s",yytext); return (CONST_CADENA);}
 	YY_BREAK
 case 45:
 /* rule 45 can match eol */
 YY_RULE_SETUP
 #line 152 "LAB01.l"
-{printf("%s ", yytext); return (ERROR);}
+{printf("error=%s ", yytext); return (ERROR);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP

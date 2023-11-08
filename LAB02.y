@@ -82,7 +82,7 @@ campos: campo campos_;
 campos_: | COMA campos;
 campo: IDENTIFICADOR tipoDato dato | IDENTIFICADOR tipoDato;
 tipoDato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
-dato: PARENTA DATO_INTEGER PARENTC;
+dato: PARENTA CONST_ENTERO PARENTC;
 
 eliminacion_tabla: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 

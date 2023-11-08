@@ -78,8 +78,8 @@
     int yyerror(const char* s);
     extern "C" FILE* yyin;
 
-    vector<int> error_lineas;
-    int numLinea = 1;
+    vector<int> mistakes;
+    int numero_linea = 1;
 
 #line 85 "LAB02.cpp"
 
@@ -168,34 +168,33 @@ enum yysymbol_kind_t
   YYSYMBOL_start = 56,                     /* start  */
   YYSYMBOL_start_ = 57,                    /* start_  */
   YYSYMBOL_comandos = 58,                  /* comandos  */
-  YYSYMBOL_creacion_tabla = 59,            /* creacion_tabla  */
+  YYSYMBOL_create_statement = 59,          /* create_statement  */
   YYSYMBOL_campos = 60,                    /* campos  */
   YYSYMBOL_campos_ = 61,                   /* campos_  */
   YYSYMBOL_campo = 62,                     /* campo  */
-  YYSYMBOL_tipoDato = 63,                  /* tipoDato  */
+  YYSYMBOL_tipo_dato = 63,                 /* tipo_dato  */
   YYSYMBOL_dato = 64,                      /* dato  */
-  YYSYMBOL_eliminacion_tabla = 65,         /* eliminacion_tabla  */
-  YYSYMBOL_insercion_dato = 66,            /* insercion_dato  */
+  YYSYMBOL_drop_statement = 65,            /* drop_statement  */
+  YYSYMBOL_insert_statement = 66,          /* insert_statement  */
   YYSYMBOL_valores = 67,                   /* valores  */
   YYSYMBOL_valores_ = 68,                  /* valores_  */
-  YYSYMBOL_valor = 69,                     /* valor  */
-  YYSYMBOL_eliminacion_dato = 70,          /* eliminacion_dato  */
-  YYSYMBOL_condiciones = 71,               /* condiciones  */
-  YYSYMBOL_condiciones_ = 72,              /* condiciones_  */
-  YYSYMBOL_condicion = 73,                 /* condicion  */
-  YYSYMBOL_operador_ar = 74,               /* operador_ar  */
-  YYSYMBOL_actualizacion = 75,             /* actualizacion  */
-  YYSYMBOL_option = 76,                    /* option  */
-  YYSYMBOL_seleccion = 77,                 /* seleccion  */
-  YYSYMBOL_busqueda = 78,                  /* busqueda  */
-  YYSYMBOL_combinado = 79,                 /* combinado  */
-  YYSYMBOL_funcion = 80,                   /* funcion  */
-  YYSYMBOL_tipoFuncion = 81,               /* tipoFuncion  */
-  YYSYMBOL_condicionado = 82,              /* condicionado  */
-  YYSYMBOL_agrupacion = 83,                /* agrupacion  */
-  YYSYMBOL_ordenacion = 84,                /* ordenacion  */
-  YYSYMBOL_orden = 85,                     /* orden  */
-  YYSYMBOL_identificadores = 86            /* identificadores  */
+  YYSYMBOL_delete_statement = 69,          /* delete_statement  */
+  YYSYMBOL_condiciones = 70,               /* condiciones  */
+  YYSYMBOL_condiciones_ = 71,              /* condiciones_  */
+  YYSYMBOL_condicion = 72,                 /* condicion  */
+  YYSYMBOL_operador_ar = 73,               /* operador_ar  */
+  YYSYMBOL_update_statement = 74,          /* update_statement  */
+  YYSYMBOL_option = 75,                    /* option  */
+  YYSYMBOL_select_statement = 76,          /* select_statement  */
+  YYSYMBOL_busqueda = 77,                  /* busqueda  */
+  YYSYMBOL_combinado = 78,                 /* combinado  */
+  YYSYMBOL_funcion = 79,                   /* funcion  */
+  YYSYMBOL_tipoFuncion = 80,               /* tipoFuncion  */
+  YYSYMBOL_condicionado = 81,              /* condicionado  */
+  YYSYMBOL_agrupacion = 82,                /* agrupacion  */
+  YYSYMBOL_ordenacion = 83,                /* ordenacion  */
+  YYSYMBOL_orden = 84,                     /* orden  */
+  YYSYMBOL_identificadores = 85            /* identificadores  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -523,16 +522,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  32
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   123
+#define YYLAST   110
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  55
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  32
+#define YYNNTS  31
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  68
+#define YYNRULES  65
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  124
+#define YYNSTATES  121
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   309
@@ -588,11 +587,11 @@ static const yytype_int8 yyrline[] =
 {
        0,    70,    70,    71,    71,    72,    73,    74,    75,    76,
       77,    78,    80,    81,    82,    82,    83,    83,    84,    84,
-      84,    85,    87,    89,    90,    91,    91,    92,    92,    92,
-      94,    95,    96,    96,    96,    97,    97,    98,    98,    98,
-      98,    98,    98,    98,   100,   101,   101,   103,   104,   104,
-     105,   105,   105,   105,   106,   107,   107,   107,   107,   108,
-     108,   109,   109,   110,   110,   111,   111,   112,   112
+      84,    85,    87,    89,    90,    91,    91,    93,    94,    95,
+      95,    95,    96,    96,    97,    97,    97,    97,    97,    97,
+      97,    99,   100,   100,   102,   103,   103,   104,   104,   104,
+     104,   105,   106,   106,   106,   106,   107,   107,   108,   108,
+     109,   109,   110,   110,   111,   111
 };
 #endif
 
@@ -617,12 +616,12 @@ static const char *const yytname[] =
   "PARENTC", "COMA", "PUNTOYCOMA", "ASIGNACION", "ASTERISCO", "DIGITO",
   "LETRA", "GUIIONES", "PUNTO", "DOSPUNTOS", "CONST_ENTERO", "CONST_FLOAT",
   "NUMERO", "IDENTIFICADOR", "CONST_CADENA", "ERROR", "$accept", "start",
-  "start_", "comandos", "creacion_tabla", "campos", "campos_", "campo",
-  "tipoDato", "dato", "eliminacion_tabla", "insercion_dato", "valores",
-  "valores_", "valor", "eliminacion_dato", "condiciones", "condiciones_",
-  "condicion", "operador_ar", "actualizacion", "option", "seleccion",
-  "busqueda", "combinado", "funcion", "tipoFuncion", "condicionado",
-  "agrupacion", "ordenacion", "orden", "identificadores", YY_NULLPTR
+  "start_", "comandos", "create_statement", "campos", "campos_", "campo",
+  "tipo_dato", "dato", "drop_statement", "insert_statement", "valores",
+  "valores_", "delete_statement", "condiciones", "condiciones_",
+  "condicion", "operador_ar", "update_statement", "option",
+  "select_statement", "busqueda", "combinado", "funcion", "tipoFuncion",
+  "condicionado", "agrupacion", "ordenacion", "orden", "identificadores", YY_NULLPTR
 };
 
 static const char *
@@ -632,7 +631,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-65)
+#define YYPACT_NINF (-62)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -646,19 +645,19 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      66,   -25,   -29,   -28,   -10,     9,    20,   -22,    37,    55,
-     -65,   -65,   -65,   -65,   -65,   -65,   -65,     3,    -2,   -65,
-     -65,   -65,   -65,   -65,    17,    27,   -65,    22,    25,    16,
-      21,    53,   -65,   -65,    66,    26,   -65,    -6,    28,    -6,
-      29,    57,    73,    30,   -65,     5,    44,    45,   -65,    78,
-     -65,    47,    49,    -9,    58,   -65,   -65,   -65,    51,    50,
-      26,   -65,    -9,    83,   -65,    12,   -65,   -65,   -65,    19,
-      19,    52,   -16,    -5,    70,   -65,   -65,   -65,   -65,    42,
-      87,    59,    56,   -65,   -65,   -65,   -65,   -65,   -65,   -65,
-      12,    48,   -65,    -9,    -9,   -65,    19,   -65,    91,    60,
-     -65,    54,    61,    62,    12,   -65,   -65,   -65,   -65,   -65,
-      -9,   -65,    64,     1,   -65,   -65,   -65,    67,    54,   -65,
-     -65,   -65,   -65,   -65
+      48,   -20,   -24,   -17,    -9,    29,    45,    12,    65,    22,
+     -62,   -62,   -62,   -62,   -62,   -62,   -62,    28,    26,   -62,
+     -62,   -62,   -62,   -62,    30,    50,   -62,    31,    34,    21,
+      23,    55,   -62,   -62,    48,    24,   -62,    -2,    25,    -2,
+      27,    52,    72,    32,   -62,    38,    41,    42,   -62,    75,
+     -62,    44,    47,    -8,    56,   -62,   -62,   -62,    49,    51,
+      24,   -62,    -8,    81,   -62,    38,     6,     6,    53,   -29,
+      -5,    67,   -62,   -62,   -62,   -62,    39,    82,    57,    54,
+     -62,   -62,   -62,   -62,   -62,   -62,   -62,    38,    43,   -62,
+      -8,    -8,   -62,     6,   -62,    90,    59,   -62,    58,    60,
+      38,   -62,    61,   -62,   -62,   -62,   -62,    -8,   -62,    63,
+     -19,   -62,   -62,   -62,    64,    58,   -62,   -62,   -62,   -62,
+     -62
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -667,36 +666,36 @@ static const yytype_int8 yypact[] =
 static const yytype_int8 yydefact[] =
 {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       5,     6,     7,     8,     9,    10,    11,     0,     0,    55,
-      56,    57,    58,    48,    50,     0,    49,    51,     0,     0,
+       5,     6,     7,     8,     9,    10,    11,     0,     0,    52,
+      53,    54,    55,    45,    47,     0,    46,    48,     0,     0,
        0,     0,     1,     2,     0,     0,    22,     0,     0,     0,
-       0,     0,     0,     0,     4,     0,     0,    14,    52,    59,
-      53,     0,     0,     0,     0,    18,    19,    20,    17,     0,
-       0,    13,     0,    61,    54,     0,    27,    28,    29,     0,
-       0,     0,    32,     0,     0,    16,    12,    15,    60,     0,
-      63,     0,    25,    43,    38,    41,    42,    39,    40,    37,
-       0,     0,    30,     0,     0,    31,    45,    46,     0,     0,
-      62,     0,     0,     0,     0,    24,    35,    36,    33,    34,
-       0,    21,    67,     0,    47,    23,    26,     0,     0,    66,
-      65,    64,    44,    68
+       0,     0,     0,     0,     4,     0,     0,    14,    49,    56,
+      50,     0,     0,     0,     0,    18,    19,    20,    17,     0,
+       0,    13,     0,    58,    51,     0,     0,     0,     0,    29,
+       0,     0,    16,    12,    15,    57,     0,    60,    25,     0,
+      40,    35,    38,    39,    36,    37,    34,     0,     0,    27,
+       0,     0,    28,    42,    43,     0,     0,    59,     0,     0,
+       0,    24,     0,    32,    33,    30,    31,     0,    21,    64,
+       0,    44,    26,    23,     0,     0,    63,    62,    61,    41,
+      65
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -65,    71,   -65,    92,   -65,    63,   -65,   -65,   -65,   -65,
-     -65,   -65,     6,   -65,   -64,   -65,   -62,   -65,   -65,    39,
-     -65,   -65,   -65,   -65,   -27,   -65,   -65,   -65,   -65,   -65,
-     -65,   -11
+     -62,    66,   -62,    95,   -62,    46,   -62,   -62,   -45,   -62,
+     -62,   -62,    -1,   -62,   -62,   -61,   -62,   -62,    40,   -62,
+     -62,   -62,   -62,    17,   -62,   -62,   -62,   -62,   -62,   -62,
+      -7
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     8,    33,     9,    10,    46,    61,    47,    58,    75,
-      11,    12,    81,   105,    70,    13,    71,    95,    72,    90,
-      14,    98,    15,    25,    26,    27,    28,    63,    80,   102,
-     121,   113
+       0,     8,    33,     9,    10,    46,    61,    47,    67,    72,
+      11,    12,    79,   101,    13,    68,    92,    69,    87,    14,
+      95,    15,    25,    26,    27,    28,    63,    77,    99,   118,
+     110
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -704,36 +703,34 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      78,    82,    19,    20,    21,    22,    19,    20,    21,    22,
-      48,    97,    50,    66,    67,    68,    16,    66,    67,    68,
-      93,    94,   119,    17,    18,    29,   106,    55,    56,    57,
-      31,   108,   109,    23,    66,    67,    68,    32,    30,    36,
-      82,    35,    24,    69,   120,    38,    24,    96,   117,    83,
-      84,    85,    86,    87,    88,    -3,     1,    37,     2,     3,
-       4,    89,    39,    40,     5,     6,     7,     1,    41,     2,
-       3,     4,    43,    42,    52,     5,     6,     7,    45,    53,
-      49,    51,    54,    59,    62,    60,    64,    65,    73,    74,
-      79,    76,    99,    92,   100,   101,   104,   110,   103,   111,
-     107,    34,   114,   115,   118,    44,   112,   123,   122,    91,
-     116,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,    77
+      58,    75,   116,    19,    20,    21,    22,    90,    91,    94,
+      19,    20,    21,    22,    55,    56,    57,    55,    56,    57,
+      78,    16,    -3,     1,   117,     2,     3,     4,    17,   105,
+     106,     5,     6,     7,    23,    18,    80,    81,    82,    83,
+      84,    85,   103,    24,    66,    29,   114,    93,    86,     1,
+      24,     2,     3,     4,    48,    78,    50,     5,     6,     7,
+      55,    56,    57,    30,    31,    32,    35,    36,    38,    52,
+      37,    39,    40,    41,    43,    42,    45,    49,    53,    51,
+      59,    62,    60,    64,    54,    65,    70,    71,    76,    96,
+      98,    97,    73,   102,    89,   104,   107,   100,   108,   112,
+      44,   111,   113,   115,    34,   119,    74,    88,   120,     0,
+     109
 };
 
 static const yytype_int8 yycheck[] =
 {
-      62,    65,    12,    13,    14,    15,    12,    13,    14,    15,
-      37,    73,    39,    22,    23,    24,    41,    22,    23,    24,
-      36,    37,    21,    52,    52,    16,    90,    22,    23,    24,
-      52,    93,    94,    43,    22,    23,    24,     0,    18,    41,
-     104,    38,    52,    52,    43,    18,    52,    52,   110,    30,
-      31,    32,    33,    34,    35,     0,     1,    40,     3,     4,
-       5,    42,    40,    38,     9,    10,    11,     1,    52,     3,
-       4,     5,    19,    52,    17,     9,    10,    11,    52,     6,
-      52,    52,    52,    39,     6,    40,    39,    38,    30,    38,
-       7,    41,    22,    41,    52,     8,    40,     6,    39,    39,
-      52,     9,    41,    41,    40,    34,    52,   118,    41,    70,
-     104,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    60
+      45,    62,    21,    12,    13,    14,    15,    36,    37,    70,
+      12,    13,    14,    15,    22,    23,    24,    22,    23,    24,
+      65,    41,     0,     1,    43,     3,     4,     5,    52,    90,
+      91,     9,    10,    11,    43,    52,    30,    31,    32,    33,
+      34,    35,    87,    52,    52,    16,   107,    52,    42,     1,
+      52,     3,     4,     5,    37,   100,    39,     9,    10,    11,
+      22,    23,    24,    18,    52,     0,    38,    41,    18,    17,
+      40,    40,    38,    52,    19,    52,    52,    52,     6,    52,
+      39,     6,    40,    39,    52,    38,    30,    38,     7,    22,
+       8,    52,    41,    39,    41,    52,     6,    40,    39,   100,
+      34,    41,    41,    40,     9,    41,    60,    67,   115,    -1,
+      52
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -741,18 +738,18 @@ static const yytype_int8 yycheck[] =
 static const yytype_int8 yystos[] =
 {
        0,     1,     3,     4,     5,     9,    10,    11,    56,    58,
-      59,    65,    66,    70,    75,    77,    41,    52,    52,    12,
-      13,    14,    15,    43,    52,    78,    79,    80,    81,    16,
+      59,    65,    66,    69,    74,    76,    41,    52,    52,    12,
+      13,    14,    15,    43,    52,    77,    78,    79,    80,    16,
       18,    52,     0,    57,    58,    38,    41,    40,    18,    40,
-      38,    52,    52,    19,    56,    52,    60,    62,    79,    52,
-      79,    52,    17,     6,    52,    22,    23,    24,    63,    39,
-      40,    61,     6,    82,    39,    38,    22,    23,    24,    52,
-      69,    71,    73,    30,    38,    64,    41,    60,    71,     7,
-      83,    67,    69,    30,    31,    32,    33,    34,    35,    42,
-      74,    74,    41,    36,    37,    72,    52,    71,    76,    22,
-      52,     8,    84,    39,    40,    68,    69,    52,    71,    71,
-       6,    39,    52,    86,    41,    41,    67,    71,    40,    21,
-      43,    85,    41,    86
+      38,    52,    52,    19,    56,    52,    60,    62,    78,    52,
+      78,    52,    17,     6,    52,    22,    23,    24,    63,    39,
+      40,    61,     6,    81,    39,    38,    52,    63,    70,    72,
+      30,    38,    64,    41,    60,    70,     7,    82,    63,    67,
+      30,    31,    32,    33,    34,    35,    42,    73,    73,    41,
+      36,    37,    71,    52,    70,    75,    22,    52,     8,    83,
+      40,    68,    39,    63,    52,    70,    70,     6,    39,    52,
+      85,    41,    67,    41,    70,    40,    21,    43,    84,    41,
+      85
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -760,11 +757,11 @@ static const yytype_int8 yyr1[] =
 {
        0,    55,    56,    57,    57,    58,    58,    58,    58,    58,
       58,    58,    59,    60,    61,    61,    62,    62,    63,    63,
-      63,    64,    65,    66,    67,    68,    68,    69,    69,    69,
-      70,    71,    72,    72,    72,    73,    73,    74,    74,    74,
-      74,    74,    74,    74,    75,    76,    76,    77,    78,    78,
-      79,    79,    79,    79,    80,    81,    81,    81,    81,    82,
-      82,    83,    83,    84,    84,    85,    85,    86,    86
+      63,    64,    65,    66,    67,    68,    68,    69,    70,    71,
+      71,    71,    72,    72,    73,    73,    73,    73,    73,    73,
+      73,    74,    75,    75,    76,    77,    77,    78,    78,    78,
+      78,    79,    80,    80,    80,    80,    81,    81,    82,    82,
+      83,    83,    84,    84,    85,    85
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -772,11 +769,11 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     2,     0,     2,     1,     1,     1,     1,     1,
        1,     2,     6,     2,     0,     2,     3,     2,     1,     1,
-       1,     3,     3,     8,     2,     0,     2,     1,     1,     1,
-       6,     2,     0,     2,     2,     3,     3,     1,     1,     1,
-       1,     1,     1,     1,     9,     1,     1,     8,     1,     1,
-       1,     1,     3,     3,     4,     1,     1,     1,     1,     0,
-       2,     0,     2,     0,     3,     1,     1,     1,     3
+       1,     3,     3,     8,     2,     0,     2,     6,     2,     0,
+       2,     2,     3,     3,     1,     1,     1,     1,     1,     1,
+       1,     9,     1,     1,     8,     1,     1,     1,     1,     3,
+       3,     4,     1,     1,     1,     1,     0,     2,     0,     2,
+       0,     3,     1,     1,     1,     3
 };
 
 
@@ -1239,50 +1236,50 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 5: /* comandos: creacion_tabla  */
+  case 5: /* comandos: create_statement  */
 #line 72 "LAB02.y"
-                         { numLinea++; }
-#line 1246 "LAB02.cpp"
+                           { numero_linea++; }
+#line 1243 "LAB02.cpp"
     break;
 
-  case 6: /* comandos: eliminacion_tabla  */
+  case 6: /* comandos: drop_statement  */
 #line 73 "LAB02.y"
-                            { numLinea++; }
-#line 1252 "LAB02.cpp"
+                         { numero_linea++; }
+#line 1249 "LAB02.cpp"
     break;
 
-  case 7: /* comandos: insercion_dato  */
+  case 7: /* comandos: insert_statement  */
 #line 74 "LAB02.y"
-                         { numLinea++; }
-#line 1258 "LAB02.cpp"
+                           { numero_linea++; }
+#line 1255 "LAB02.cpp"
     break;
 
-  case 8: /* comandos: eliminacion_dato  */
+  case 8: /* comandos: delete_statement  */
 #line 75 "LAB02.y"
-                           { numLinea++; }
-#line 1264 "LAB02.cpp"
+                           { numero_linea++; }
+#line 1261 "LAB02.cpp"
     break;
 
-  case 9: /* comandos: actualizacion  */
+  case 9: /* comandos: update_statement  */
 #line 76 "LAB02.y"
-                        { numLinea++; }
-#line 1270 "LAB02.cpp"
+                           { numero_linea++; }
+#line 1267 "LAB02.cpp"
     break;
 
-  case 10: /* comandos: seleccion  */
+  case 10: /* comandos: select_statement  */
 #line 77 "LAB02.y"
-                    { numLinea++; }
-#line 1276 "LAB02.cpp"
+                           { numero_linea++; }
+#line 1273 "LAB02.cpp"
     break;
 
   case 11: /* comandos: error PUNTOYCOMA  */
 #line 78 "LAB02.y"
-                           { error_lineas.push_back(numLinea++); }
-#line 1282 "LAB02.cpp"
+                           { mistakes.push_back(numero_linea++); }
+#line 1279 "LAB02.cpp"
     break;
 
 
-#line 1286 "LAB02.cpp"
+#line 1283 "LAB02.cpp"
 
       default: break;
     }
@@ -1475,7 +1472,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 114 "LAB02.y"
+#line 113 "LAB02.y"
  
 
 int main(int argc, char* argv[]) {
@@ -1493,12 +1490,12 @@ int main(int argc, char* argv[]) {
     yyparse();
     fclose(yyin);
 
-    if (error_lineas.size() > 0) {
+    if (mistakes.size() > 0) {
         cout<<"\n\nIncorrecto\n\n";
-        for (int linea : error_lineas) {
+        for (int linea : mistakes) {
             cout<<"Error en la linea "<<linea<<endl;
         }
-        error_lineas.clear();
+        mistakes.clear();
     } else {
         cout<<"\n\nCorrecto\n";
     }

@@ -8,8 +8,8 @@
     int yyerror(const char* s);
     extern "C" FILE* yyin;
 
-    vector<int> error_lineas;
-    int numLinea = 1;
+    vector<int> mistakes;
+    int numero_linea = 1;
 %}
 
 %token CREATETABLE
@@ -69,38 +69,37 @@
 
 start: comandos start_
 start_: | comandos start
-comandos: creacion_tabla { numLinea++; }
-        | eliminacion_tabla { numLinea++; }
-        | insercion_dato { numLinea++; }
-        | eliminacion_dato { numLinea++; }
-        | actualizacion { numLinea++; }
-        | seleccion { numLinea++; }
-        | error PUNTOYCOMA { error_lineas.push_back(numLinea++); }
+comandos: create_statement { numero_linea++; }
+        | drop_statement { numero_linea++; }
+        | insert_statement { numero_linea++; }
+        | delete_statement { numero_linea++; }
+        | update_statement { numero_linea++; }
+        | select_statement { numero_linea++; }
+        | error PUNTOYCOMA { mistakes.push_back(numero_linea++); }
 
-creacion_tabla: CREATETABLE IDENTIFICADOR PARENTA campos PARENTC PUNTOYCOMA;
+create_statement: CREATETABLE IDENTIFICADOR PARENTA campos PARENTC PUNTOYCOMA;
 campos: campo campos_;
 campos_: | COMA campos;
-campo: IDENTIFICADOR tipoDato dato | IDENTIFICADOR tipoDato;
-tipoDato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
+campo: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
+tipo_dato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
 dato: PARENTA DATO_INTEGER PARENTC;
 
-eliminacion_tabla: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
+drop_statement: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 
-insercion_dato: INSERT INTO IDENTIFICADOR VALUES PARENTA valores PARENTC PUNTOYCOMA;
-valores: valor valores_;
+insert_statement: INSERT INTO IDENTIFICADOR VALUES PARENTA valores PARENTC PUNTOYCOMA;
+valores: tipo_dato valores_;
 valores_: | COMA valores;
-valor: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
 
-eliminacion_dato: DELETE FROM IDENTIFICADOR WHERE condiciones PUNTOYCOMA;
+delete_statement: DELETE FROM IDENTIFICADOR WHERE condiciones PUNTOYCOMA;
 condiciones: condicion condiciones_;
 condiciones_: | AND condiciones | OR condiciones; 
-condicion: IDENTIFICADOR operador_ar valor | valor operador_ar IDENTIFICADOR;
+condicion: IDENTIFICADOR operador_ar tipo_dato | tipo_dato operador_ar IDENTIFICADOR;
 operador_ar: ASIGNACION | DIFERENCIA | MAYORIQ | MENORIQ | MAYORQ | MENORQ | IGUALDAD;
 
-actualizacion: UPDATE IDENTIFICADOR SET IDENTIFICADOR IGUALDAD option WHERE condiciones PUNTOYCOMA;
+update_statement: UPDATE IDENTIFICADOR SET IDENTIFICADOR IGUALDAD option WHERE condiciones PUNTOYCOMA;
 option: IDENTIFICADOR | condiciones;
 
-seleccion: SELECT busqueda FROM IDENTIFICADOR condicionado agrupacion ordenacion PUNTOYCOMA;
+select_statement: SELECT busqueda FROM IDENTIFICADOR condicionado agrupacion ordenacion PUNTOYCOMA;
 busqueda: ASTERISCO | combinado;
 combinado: IDENTIFICADOR | funcion | IDENTIFICADOR COMA combinado | funcion COMA combinado;
 funcion: tipoFuncion PARENTA IDENTIFICADOR PARENTC;
@@ -128,12 +127,12 @@ int main(int argc, char* argv[]) {
     yyparse();
     fclose(yyin);
 
-    if (error_lineas.size() > 0) {
+    if (mistakes.size() > 0) {
         cout<<"\n\nIncorrecto\n\n";
-        for (int linea : error_lineas) {
+        for (int linea : mistakes) {
             cout<<"Error en la linea "<<linea<<endl;
         }
-        error_lineas.clear();
+        mistakes.clear();
     } else {
         cout<<"\n\nCorrecto\n";
     }

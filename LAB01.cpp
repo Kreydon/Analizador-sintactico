@@ -1104,7 +1104,7 @@ YY_DECL
 		}
 
 	{
-#line 102 "LAB01.l"
+#line 101 "LAB01.l"
 
 #line 1110 "LAB01.cpp"
 
@@ -1165,218 +1165,218 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 103 "LAB01.l"
+#line 102 "LAB01.l"
 {printf("CREATE TABLE "); return (CREATETABLE);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 104 "LAB01.l"
+#line 103 "LAB01.l"
 {printf("DROP TABLE "); return (DROPTABLE);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 105 "LAB01.l"
+#line 104 "LAB01.l"
 {printf("SELECT "); return (SELECT);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 106 "LAB01.l"
+#line 105 "LAB01.l"
 {printf("WHERE "); return (WHERE);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 107 "LAB01.l"
+#line 106 "LAB01.l"
 {printf("GROUP BY "); return (GROUPBY);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 108 "LAB01.l"
+#line 107 "LAB01.l"
 {printf("ORDER BY "); return (ORDERBY);}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 109 "LAB01.l"
+#line 108 "LAB01.l"
 {printf("INSERT "); return (INSERT);}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 110 "LAB01.l"
+#line 109 "LAB01.l"
 {printf("DELETE "); return (DELETE);}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 111 "LAB01.l"
+#line 110 "LAB01.l"
 {printf("UPDATE "); return (UPDATE);}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 112 "LAB01.l"
+#line 111 "LAB01.l"
 {printf("MAX "); return (MAX);}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 113 "LAB01.l"
+#line 112 "LAB01.l"
 {printf("MIN "); return (MIN);}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 114 "LAB01.l"
+#line 113 "LAB01.l"
 {printf("AVG "); return (AVG);}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 115 "LAB01.l"
+#line 114 "LAB01.l"
 {printf("COUNT "); return (COUNT);}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 116 "LAB01.l"
+#line 115 "LAB01.l"
 {printf("INTO "); return (INTO);}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 117 "LAB01.l"
+#line 116 "LAB01.l"
 {printf("VALUES "); return (VALUES);}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 118 "LAB01.l"
+#line 117 "LAB01.l"
 {printf("FROM "); return (FROM);}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 119 "LAB01.l"
+#line 118 "LAB01.l"
 {printf("SET "); return (SET);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 120 "LAB01.l"
+#line 119 "LAB01.l"
 {printf("ASC "); return (ASC);}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 121 "LAB01.l"
+#line 120 "LAB01.l"
 {printf("DESC "); return (DESC);}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 122 "LAB01.l"
+#line 121 "LAB01.l"
 {printf("INTEGER "); return (DATO_INTEGER);}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 123 "LAB01.l"
+#line 122 "LAB01.l"
 {printf("DECIMAL "); return (DATO_DECIMAL);}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 124 "LAB01.l"
+#line 123 "LAB01.l"
 {printf("VARCHAR "); return (DATO_VARCHAR);}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 125 "LAB01.l"
+#line 124 "LAB01.l"
 {printf("suma=%s ",yytext); return (SUMA);}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 126 "LAB01.l"
+#line 125 "LAB01.l"
 {printf("resta=%s ",yytext); return (RESTA);}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 127 "LAB01.l"
+#line 126 "LAB01.l"
 {printf("multiplicación=%s ",yytext); return (MULT);}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 128 "LAB01.l"
+#line 127 "LAB01.l"
 {printf("división=%s ",yytext); return (DIV);}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 129 "LAB01.l"
+#line 128 "LAB01.l"
 {printf("igualdad=%s ",yytext); return (IGUALDAD);}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 130 "LAB01.l"
+#line 129 "LAB01.l"
 {printf("diferencia=%s ",yytext); return (DIFERENCIA);}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 131 "LAB01.l"
+#line 130 "LAB01.l"
 {printf("mayorq=%s ",yytext); return (MAYORQ);}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 132 "LAB01.l"
+#line 131 "LAB01.l"
 {printf("menorq=%s ",yytext); return (MENORQ);}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 133 "LAB01.l"
+#line 132 "LAB01.l"
 {printf("mayorigualq=%s ",yytext); return (MAYORIQ);}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 134 "LAB01.l"
+#line 133 "LAB01.l"
 {printf("menorigualq=%s ",yytext); return (MENORIQ);}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 135 "LAB01.l"
+#line 134 "LAB01.l"
 {printf("y=%s ",yytext); return (AND);}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 136 "LAB01.l"
+#line 135 "LAB01.l"
 {printf("o=%s ",yytext); return (OR);}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 137 "LAB01.l"
+#line 136 "LAB01.l"
 {printf("parabre=%s ",yytext); return (PARENTA);}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 138 "LAB01.l"
+#line 137 "LAB01.l"
 {printf("paracierr=%s ",yytext); return (PARENTC);}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 139 "LAB01.l"
+#line 138 "LAB01.l"
 {printf("coma=%s ",yytext); return (COMA);}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 140 "LAB01.l"
+#line 139 "LAB01.l"
 {printf("puntcoma%s ",yytext); return (PUNTOYCOMA);}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 141 "LAB01.l"
+#line 140 "LAB01.l"
 {printf("asign=%s ",yytext); return (ASIGNACION);}
 	YY_BREAK
 case 40:
 /* rule 40 can match eol */
 YY_RULE_SETUP
-#line 142 "LAB01.l"
+#line 141 "LAB01.l"
 {printf("asterisco=%s ",yytext); return (ASTERISCO);}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 143 "LAB01.l"
+#line 142 "LAB01.l"
 {printf("entero=%s ",yytext); return (CONST_ENTERO);}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 144 "LAB01.l"
+#line 143 "LAB01.l"
 {printf("decimal=%s ",yytext); return (CONST_FLOAT);}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 145 "LAB01.l"
+#line 144 "LAB01.l"
 {int idtemp = idexiste(yytext);
                   if(idtemp == -1){
                     ids.insert(ids.end(), yytext);
@@ -1386,18 +1386,18 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 151 "LAB01.l"
+#line 150 "LAB01.l"
 {printf("cadena=%s",yytext); return (CONST_CADENA);}
 	YY_BREAK
 case 45:
 /* rule 45 can match eol */
 YY_RULE_SETUP
-#line 152 "LAB01.l"
+#line 151 "LAB01.l"
 {printf("error=%s ", yytext); return (ERROR);}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 154 "LAB01.l"
+#line 153 "LAB01.l"
 ECHO;
 	YY_BREAK
 #line 1404 "LAB01.cpp"
@@ -2405,5 +2405,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 154 "LAB01.l"
+#line 153 "LAB01.l"
 

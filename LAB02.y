@@ -89,7 +89,7 @@ eliminacion_tabla: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 insercion_dato: INSERT INTO IDENTIFICADOR VALUES PARENTA valores PARENTC PUNTOYCOMA;
 valores: valor valores_;
 valores_: | COMA valores;
-valor: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
+valor: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
 
 eliminacion_dato: DELETE FROM IDENTIFICADOR WHERE condiciones PUNTOYCOMA;
 condiciones: condicion condiciones_;

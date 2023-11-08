@@ -82,13 +82,14 @@ campos: campo campos_;
 campos_: | COMA campos;
 campo: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
 tipo_dato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
-dato: PARENTA DATO_INTEGER PARENTC;
+dato: PARENTA CONST_ENTERO PARENTC;
 
 drop_statement: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 
 insert_statement: INSERT INTO IDENTIFICADOR VALUES PARENTA valores PARENTC PUNTOYCOMA;
-valores: tipo_dato valores_;
+valores: valor valores_;
 valores_: | COMA valores;
+valor: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
 
 delete_statement: DELETE FROM IDENTIFICADOR WHERE condiciones PUNTOYCOMA;
 condiciones: condicion condiciones_;

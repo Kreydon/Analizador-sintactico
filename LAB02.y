@@ -91,7 +91,6 @@ insert_values: value varios_insert;
 varios_insert: | COMA insert_values;
 value: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
 
-
 delete_statement: DELETE FROM IDENTIFICADOR WHERE where_conditions PUNTOYCOMA;
 where_conditions: where_condition varios_where;
 varios_where: | AND where_conditions | OR where_conditions; 

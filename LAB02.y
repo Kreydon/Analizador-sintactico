@@ -71,40 +71,42 @@ start: comandos start_
 start_: | comandos start
 comandos: create_statement { numero_linea++; }
         | drop_statement { numero_linea++; }
+        | select_statement { numero_linea++; }
         | insert_statement { numero_linea++; }
         | delete_statement { numero_linea++; }
         | update_statement { numero_linea++; }
-        | select_statement { numero_linea++; }
         | error PUNTOYCOMA { mistakes.push_back(numero_linea++); }
 
-create_statement: CREATETABLE IDENTIFICADOR PARENTA campos PARENTC PUNTOYCOMA;
-campos: campo campos_;
-campos_: | COMA campos;
-campo: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
+create_statement: CREATETABLE IDENTIFICADOR PARENTA create_datos PARENTC PUNTOYCOMA;
+create_datos: IDENTIFICADOR tipo_dato dato varios_create;
+varios_create: | COMA create_dato;
+create_dato: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
 tipo_dato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
-dato: PARENTA DATO_INTEGER PARENTC;
+dato: PARENTA CONST_ENTERO PARENTC;
 
 drop_statement: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 
-insert_statement: INSERT INTO IDENTIFICADOR VALUES PARENTA valores PARENTC PUNTOYCOMA;
-valores: tipo_dato valores_;
-valores_: | COMA valores;
+insert_statement: INSERT INTO IDENTIFICADOR VALUES PARENTA insert_values PARENTC PUNTOYCOMA;
+insert_values: value varios_insert;
+varios_insert: | COMA insert_values;
+value: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
 
-delete_statement: DELETE FROM IDENTIFICADOR WHERE condiciones PUNTOYCOMA;
-condiciones: condicion condiciones_;
-condiciones_: | AND condiciones | OR condiciones; 
-condicion: IDENTIFICADOR operador_ar tipo_dato | tipo_dato operador_ar IDENTIFICADOR;
-operador_ar: ASIGNACION | DIFERENCIA | MAYORIQ | MENORIQ | MAYORQ | MENORQ | IGUALDAD;
 
-update_statement: UPDATE IDENTIFICADOR SET IDENTIFICADOR IGUALDAD option WHERE condiciones PUNTOYCOMA;
-option: IDENTIFICADOR | condiciones;
+delete_statement: DELETE FROM IDENTIFICADOR WHERE where_conditions PUNTOYCOMA;
+where_conditions: where_condition varios_where;
+varios_where: | AND where_conditions | OR where_conditions; 
+where_condition: IDENTIFICADOR operadores value | value operadores IDENTIFICADOR;
+operadores: ASIGNACION | DIFERENCIA | MAYORIQ | MENORIQ | MAYORQ | MENORQ | IGUALDAD;
+
+update_statement: UPDATE IDENTIFICADOR SET IDENTIFICADOR IGUALDAD option WHERE where_conditions PUNTOYCOMA;
+option: IDENTIFICADOR | where_conditions;
 
 select_statement: SELECT busqueda FROM IDENTIFICADOR condicionado agrupacion ordenacion PUNTOYCOMA;
 busqueda: ASTERISCO | combinado;
 combinado: IDENTIFICADOR | funcion | IDENTIFICADOR COMA combinado | funcion COMA combinado;
 funcion: tipoFuncion PARENTA IDENTIFICADOR PARENTC;
 tipoFuncion: MAX | MIN | AVG | COUNT;
-condicionado: | WHERE condiciones;
+condicionado: | WHERE where_conditions;
 agrupacion: | GROUPBY IDENTIFICADOR;
 ordenacion: | ORDERBY identificadores orden;
 orden: ASTERISCO | DESC;

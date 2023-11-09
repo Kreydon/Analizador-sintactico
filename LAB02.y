@@ -1,4 +1,5 @@
 %{
+    #include <cstdio>
     #include <iostream>
     #include <vector>
 
@@ -12,63 +13,28 @@
     int numero_linea = 1;
 %}
 
-%token CREATETABLE
-%token DROPTABLE
-%token SELECT
-%token WHERE
-%token GROUPBY
-%token ORDERBY
-%token INSERT
-%token DELETE
-%token UPDATE
-%token MAX
-%token MIN
-%token AVG
-%token COUNT
-%token INTO
-%token VALUES
-%token FROM
-%token SET
-%token ASC
-%token DESC
-%token DATO_INTEGER
-%token DATO_DECIMAL
-%token DATO_VARCHAR
-%token TIPO_DATO
-%token SUMA
-%token RESTA
-%token MULT
-%token DIV
-%token IGUALDAD
-%token DIFERENCIA
-%token MAYORQ
-%token MENORQ
-%token MAYORIQ
-%token MENORIQ
-%token AND
-%token OR
-%token PARENTA
-%token PARENTC
-%token COMA
-%token PUNTOYCOMA
-%token ASIGNACION
-%token ASTERISCO
-%token DIGITO
-%token LETRA
-%token GUIIONES
-%token PUNTO
-%token DOSPUNTOS
-%token CONST_ENTERO
-%token CONST_FLOAT
-%token NUMERO
+%token CREATETABLE DROPTABLE SELECT INSERT DELETE UPDATE
+%token FROM WHERE VALUES INTO SET
+%token GROUPBY ORDERBY
+%token MAX MIN AVG COUNT
+%token ASC DESC
+%token DATO_INTEGER DATO_DECIMAL DATO_VARCHAR
+%token SUMA RESTA MULT DIV
+%token IGUALDAD DIFERENCIA MAYORQ MENORQ MAYORIQ MENORIQ ASIGNACION
+%token AND OR
+%token PARENTA PARENTC
+%token COMA PUNTOYCOMA ASTERISCO PUNTO DOSPUNTOS
+%token DIGITO LETRA GUIIONES NUMERO
+%token CONST_ENTERO CONST_FLOAT CONST_CADENA
 %token IDENTIFICADOR
-%token CONST_CADENA
 %token ERROR
+
+%start comand
 
 %%
 
-start: comandos start_
-start_: | comandos start
+comand: comandos varios_comand;
+varios_comand: | comandos comand;
 comandos: create_statement { numero_linea++; }
         | drop_statement { numero_linea++; }
         | select_statement { numero_linea++; }
@@ -77,11 +43,16 @@ comandos: create_statement { numero_linea++; }
         | update_statement { numero_linea++; }
         | error PUNTOYCOMA { mistakes.push_back(numero_linea++); }
 
-create_statement: CREATETABLE IDENTIFICADOR PARENTA create_datos PARENTC PUNTOYCOMA;
-create_datos: IDENTIFICADOR tipo_dato dato varios_create;
-varios_create: | COMA create_dato;
-create_dato: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
 tipo_dato: DATO_INTEGER | DATO_DECIMAL | DATO_VARCHAR;
+value: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
+operadores: ASIGNACION | DIFERENCIA | MAYORIQ | MENORIQ | MAYORQ | MENORQ | IGUALDAD;
+tipo_funcion: MAX | MIN | AVG | COUNT;
+
+
+create_statement: CREATETABLE IDENTIFICADOR PARENTA create_datos PARENTC PUNTOYCOMA;
+create_datos: create_dato varios_create;
+varios_create: | COMA create_datos;
+create_dato: IDENTIFICADOR tipo_dato dato | IDENTIFICADOR tipo_dato;
 dato: PARENTA CONST_ENTERO PARENTC;
 
 drop_statement: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
@@ -89,39 +60,36 @@ drop_statement: DROPTABLE IDENTIFICADOR PUNTOYCOMA;
 insert_statement: INSERT INTO IDENTIFICADOR VALUES PARENTA insert_values PARENTC PUNTOYCOMA;
 insert_values: value varios_insert;
 varios_insert: | COMA insert_values;
-value: CONST_ENTERO | CONST_FLOAT | CONST_CADENA;
 
 delete_statement: DELETE FROM IDENTIFICADOR WHERE where_conditions PUNTOYCOMA;
 where_conditions: where_condition varios_where;
 varios_where: | AND where_conditions | OR where_conditions; 
 where_condition: IDENTIFICADOR operadores value | value operadores IDENTIFICADOR;
-operadores: ASIGNACION | DIFERENCIA | MAYORIQ | MENORIQ | MAYORQ | MENORQ | IGUALDAD;
 
 update_statement: UPDATE IDENTIFICADOR SET IDENTIFICADOR IGUALDAD option WHERE where_conditions PUNTOYCOMA;
 option: IDENTIFICADOR | where_conditions;
 
-select_statement: SELECT busqueda FROM IDENTIFICADOR condicionado agrupacion ordenacion PUNTOYCOMA;
-busqueda: ASTERISCO | combinado;
-combinado: IDENTIFICADOR | funcion | IDENTIFICADOR COMA combinado | funcion COMA combinado;
-funcion: tipoFuncion PARENTA IDENTIFICADOR PARENTC;
-tipoFuncion: MAX | MIN | AVG | COUNT;
-condicionado: | WHERE where_conditions;
-agrupacion: | GROUPBY IDENTIFICADOR;
-ordenacion: | ORDERBY identificadores orden;
+select_statement: SELECT busqueda FROM IDENTIFICADOR condition group order PUNTOYCOMA;
+busqueda: ASTERISCO | mix;
 orden: ASTERISCO | DESC;
+function: tipo_funcion PARENTA IDENTIFICADOR PARENTC;
+mix: IDENTIFICADOR | function | IDENTIFICADOR COMA mix | function COMA mix;
+condition: | WHERE where_conditions;
+group: | GROUPBY IDENTIFICADOR;
+order: | ORDERBY identificadores orden;
 identificadores: IDENTIFICADOR | IDENTIFICADOR COMA identificadores;
 
 %% 
 
 int main(int argc, char* argv[]) {
     if (argc != 2) {
-        cerr<<"Uso: "<<argv[0]<<" archivo.txt\n";
+        fprintf(stderr, "Uso: %s archivo.txt\n", argv[0]);
         return 1;
     }
 
     yyin = fopen(argv[1], "r");
     if (!yyin) {
-        cerr<<"No se pudo abrir el archivo "<<argv[1]<<endl;
+        fprintf(stderr, "No se pudo abrir el archivo %s\n", argv[1]);
         return 1;
     }
 
@@ -129,13 +97,13 @@ int main(int argc, char* argv[]) {
     fclose(yyin);
 
     if (mistakes.size() > 0) {
-        cout<<"\n\nIncorrecto\n\n";
-        for (int linea : mistakes) {
-            cout<<"Error en la linea "<<linea<<endl;
+        printf("\n\nIncorrecto\n\n");
+        for (int numero_linea : mistakes) {
+            printf("Error en la linea %d\n", numero_linea);
         }
         mistakes.clear();
     } else {
-        cout<<"\n\nCorrecto\n";
+        printf("\n\nCorrecto\n");
     }
 
     return 0;

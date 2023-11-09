@@ -3,10 +3,6 @@
     #include <stdlib.h>
     #include <string>
     #include <vector>
-    #include <iostream>
-    #include <fstream>
-    #include <algorithm>
-    #include <map>
     #include "LAB02.hpp"
 
     using namespace std;
@@ -99,55 +95,55 @@ ERROR {DIGITO}+{LETRA}+({DIGITO}|{LETRA})*|[^{NUMERO}]{PUNTO}[^{NUMERO}]
 
 /*REGLAS*/
 %%
-{CREATETABLE}    {printf("CREATE TABLE "); return (CREATETABLE);}
-{DROPTABLE}      {printf("DROP TABLE "); return (DROPTABLE);}
-{SELECT}         {printf("SELECT "); return (SELECT);}
-{WHERE}          {printf("WHERE "); return (WHERE);}
-{GROUPBY}        {printf("GROUP BY "); return (GROUPBY);}
-{ORDERBY}        {printf("ORDER BY "); return (ORDERBY);}
-{INSERT}         {printf("INSERT "); return (INSERT);}
-{DELETE}         {printf("DELETE "); return (DELETE);}
-{UPDATE}         {printf("UPDATE "); return (UPDATE);}
-{MAX}            {printf("MAX "); return (MAX);}
-{MIN}            {printf("MIN "); return (MIN);}
-{AVG}            {printf("AVG "); return (AVG);}
-{COUNT}          {printf("COUNT "); return (COUNT);}
-{INTO}           {printf("INTO "); return (INTO);}
-{VALUES}         {printf("VALUES "); return (VALUES);}
-{FROM}           {printf("FROM "); return (FROM);}
-{SET}            {printf("SET "); return (SET);}
-{ASC}            {printf("ASC "); return (ASC);}
-{DESC}           {printf("DESC "); return (DESC);}
-{DATO_INTEGER}   {printf("INTEGER "); return (DATO_INTEGER);}
-{DATO_DECIMAL}   {printf("DECIMAL "); return (DATO_DECIMAL);}
-{DATO_VARCHAR}   {printf("VARCHAR "); return (DATO_VARCHAR);}
-{SUMA}           {printf("suma=%s ",yytext); return (SUMA);}
-{RESTA}          {printf("resta=%s ",yytext); return (RESTA);}
-{MULT}           {printf("multiplicación=%s ",yytext); return (MULT);}
-{DIV}            {printf("división=%s ",yytext); return (DIV);}
-{IGUALDAD}       {printf("igualdad=%s ",yytext); return (IGUALDAD);}
-{DIFERENCIA}     {printf("diferencia=%s ",yytext); return (DIFERENCIA);}
-{MAYORQ}         {printf("mayorq=%s ",yytext); return (MAYORQ);}
-{MENORQ}         {printf("menorq=%s ",yytext); return (MENORQ);}
-{MAYORIQ}        {printf("mayorigualq=%s ",yytext); return (MAYORIQ);}
-{MENORIQ}        {printf("menorigualq=%s ",yytext); return (MENORIQ);}
-{AND}            {printf("y=%s ",yytext); return (AND);}
-{OR}             {printf("o=%s ",yytext); return (OR);}
-{PARENTA}        {printf("parabre=%s ",yytext); return (PARENTA);}
-{PARENTC}        {printf("paracierr=%s ",yytext); return (PARENTC);}
-{COMA}           {printf("coma=%s ",yytext); return (COMA);}
-{PUNTOYCOMA}     {printf("puntcoma%s ",yytext); return (PUNTOYCOMA);}
-{ASIGNACION}     {printf("asign=%s ",yytext); return (ASIGNACION);}
-[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {printf("asterisco=%s ",yytext); return (ASTERISCO);}
-{CONST_ENTERO}   {printf("entero=%s ",yytext); return (CONST_ENTERO);}
-{CONST_FLOAT}    {printf("decimal=%s ",yytext); return (CONST_FLOAT);}
+{CREATETABLE}    {return (CREATETABLE);}
+{DROPTABLE}      {return (DROPTABLE);}
+{SELECT}         {return (SELECT);}
+{WHERE}          {return (WHERE);}
+{GROUPBY}        {return (GROUPBY);}
+{ORDERBY}        {return (ORDERBY);}
+{INSERT}         {return (INSERT);}
+{DELETE}         {return (DELETE);}
+{UPDATE}         {return (UPDATE);}
+{MAX}            {return (MAX);}
+{MIN}            {return (MIN);}
+{AVG}            {return (AVG);}
+{COUNT}          {return (COUNT);}
+{INTO}           {return (INTO);}
+{VALUES}         {return (VALUES);}
+{FROM}           {return (FROM);}
+{SET}            {return (SET);}
+{ASC}            {return (ASC);}
+{DESC}           {return (DESC);}
+{DATO_INTEGER}   {return (DATO_INTEGER);}
+{DATO_DECIMAL}   {return (DATO_DECIMAL);}
+{DATO_VARCHAR}   {return (DATO_VARCHAR);}
+{SUMA}           {return (SUMA);}
+{RESTA}          {return (RESTA);}
+{MULT}           {return (MULT);}
+{DIV}            {return (DIV);}
+{IGUALDAD}       {return (IGUALDAD);}
+{DIFERENCIA}     {return (DIFERENCIA);}
+{MAYORQ}         {return (MAYORQ);}
+{MENORQ}         {return (MENORQ);}
+{MAYORIQ}        {return (MAYORIQ);}
+{MENORIQ}        {return (MENORIQ);}
+{AND}            {return (AND);}
+{OR}             {return (OR);}
+{PARENTA}        {return (PARENTA);}
+{PARENTC}        {return (PARENTC);}
+{COMA}           {return (COMA);}
+{PUNTOYCOMA}     {return (PUNTOYCOMA);}
+{ASIGNACION}     {return (ASIGNACION);}
+[^({NUMERO}|{PARENTA})]{ASTERISCO}[^({NUMERO}|{PARENTC})] {return (ASTERISCO);}
+{CONST_ENTERO}   {return (CONST_ENTERO);}
+{CONST_FLOAT}    {return (CONST_FLOAT);}
 {IDENTIFICADOR}  {int idtemp = idexiste(yytext);
                   if(idtemp == -1){
                     ids.insert(ids.end(), yytext);
                     idtemp = idexiste(yytext);
                   }
-                  printf("id%d=%s ", idtemp + 1, yytext); return (IDENTIFICADOR);}
-{CONST_CADENA}   {printf("cadena=%s",yytext); return (CONST_CADENA);}
-{ERROR}          {printf("error=%s ", yytext); return (ERROR);}
+                  return (IDENTIFICADOR);}
+{CONST_CADENA}   {return (CONST_CADENA);}
+{ERROR}          {return (ERROR);}
 
 %%

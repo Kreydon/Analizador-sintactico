@@ -57,55 +57,54 @@ extern int yydebug;
     CREATETABLE = 258,             /* CREATETABLE  */
     DROPTABLE = 259,               /* DROPTABLE  */
     SELECT = 260,                  /* SELECT  */
-    WHERE = 261,                   /* WHERE  */
-    GROUPBY = 262,                 /* GROUPBY  */
-    ORDERBY = 263,                 /* ORDERBY  */
-    INSERT = 264,                  /* INSERT  */
-    DELETE = 265,                  /* DELETE  */
-    UPDATE = 266,                  /* UPDATE  */
-    MAX = 267,                     /* MAX  */
-    MIN = 268,                     /* MIN  */
-    AVG = 269,                     /* AVG  */
-    COUNT = 270,                   /* COUNT  */
-    INTO = 271,                    /* INTO  */
-    VALUES = 272,                  /* VALUES  */
-    FROM = 273,                    /* FROM  */
-    SET = 274,                     /* SET  */
+    INSERT = 261,                  /* INSERT  */
+    DELETE = 262,                  /* DELETE  */
+    UPDATE = 263,                  /* UPDATE  */
+    FROM = 264,                    /* FROM  */
+    WHERE = 265,                   /* WHERE  */
+    VALUES = 266,                  /* VALUES  */
+    INTO = 267,                    /* INTO  */
+    SET = 268,                     /* SET  */
+    GROUPBY = 269,                 /* GROUPBY  */
+    ORDERBY = 270,                 /* ORDERBY  */
+    MAX = 271,                     /* MAX  */
+    MIN = 272,                     /* MIN  */
+    AVG = 273,                     /* AVG  */
+    COUNT = 274,                   /* COUNT  */
     ASC = 275,                     /* ASC  */
     DESC = 276,                    /* DESC  */
     DATO_INTEGER = 277,            /* DATO_INTEGER  */
     DATO_DECIMAL = 278,            /* DATO_DECIMAL  */
     DATO_VARCHAR = 279,            /* DATO_VARCHAR  */
-    TIPO_DATO = 280,               /* TIPO_DATO  */
-    SUMA = 281,                    /* SUMA  */
-    RESTA = 282,                   /* RESTA  */
-    MULT = 283,                    /* MULT  */
-    DIV = 284,                     /* DIV  */
-    IGUALDAD = 285,                /* IGUALDAD  */
-    DIFERENCIA = 286,              /* DIFERENCIA  */
-    MAYORQ = 287,                  /* MAYORQ  */
-    MENORQ = 288,                  /* MENORQ  */
-    MAYORIQ = 289,                 /* MAYORIQ  */
-    MENORIQ = 290,                 /* MENORIQ  */
+    SUMA = 280,                    /* SUMA  */
+    RESTA = 281,                   /* RESTA  */
+    MULT = 282,                    /* MULT  */
+    DIV = 283,                     /* DIV  */
+    IGUALDAD = 284,                /* IGUALDAD  */
+    DIFERENCIA = 285,              /* DIFERENCIA  */
+    MAYORQ = 286,                  /* MAYORQ  */
+    MENORQ = 287,                  /* MENORQ  */
+    MAYORIQ = 288,                 /* MAYORIQ  */
+    MENORIQ = 289,                 /* MENORIQ  */
+    ASIGNACION = 290,              /* ASIGNACION  */
     AND = 291,                     /* AND  */
     OR = 292,                      /* OR  */
     PARENTA = 293,                 /* PARENTA  */
     PARENTC = 294,                 /* PARENTC  */
     COMA = 295,                    /* COMA  */
     PUNTOYCOMA = 296,              /* PUNTOYCOMA  */
-    ASIGNACION = 297,              /* ASIGNACION  */
-    ASTERISCO = 298,               /* ASTERISCO  */
-    DIGITO = 299,                  /* DIGITO  */
-    LETRA = 300,                   /* LETRA  */
-    GUIIONES = 301,                /* GUIIONES  */
-    PUNTO = 302,                   /* PUNTO  */
-    DOSPUNTOS = 303,               /* DOSPUNTOS  */
+    ASTERISCO = 297,               /* ASTERISCO  */
+    PUNTO = 298,                   /* PUNTO  */
+    DOSPUNTOS = 299,               /* DOSPUNTOS  */
+    DIGITO = 300,                  /* DIGITO  */
+    LETRA = 301,                   /* LETRA  */
+    GUIIONES = 302,                /* GUIIONES  */
+    NUMERO = 303,                  /* NUMERO  */
     CONST_ENTERO = 304,            /* CONST_ENTERO  */
     CONST_FLOAT = 305,             /* CONST_FLOAT  */
-    NUMERO = 306,                  /* NUMERO  */
+    CONST_CADENA = 306,            /* CONST_CADENA  */
     IDENTIFICADOR = 307,           /* IDENTIFICADOR  */
-    CONST_CADENA = 308,            /* CONST_CADENA  */
-    ERROR = 309                    /* ERROR  */
+    ERROR = 308                    /* ERROR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -117,55 +116,54 @@ extern int yydebug;
 #define CREATETABLE 258
 #define DROPTABLE 259
 #define SELECT 260
-#define WHERE 261
-#define GROUPBY 262
-#define ORDERBY 263
-#define INSERT 264
-#define DELETE 265
-#define UPDATE 266
-#define MAX 267
-#define MIN 268
-#define AVG 269
-#define COUNT 270
-#define INTO 271
-#define VALUES 272
-#define FROM 273
-#define SET 274
+#define INSERT 261
+#define DELETE 262
+#define UPDATE 263
+#define FROM 264
+#define WHERE 265
+#define VALUES 266
+#define INTO 267
+#define SET 268
+#define GROUPBY 269
+#define ORDERBY 270
+#define MAX 271
+#define MIN 272
+#define AVG 273
+#define COUNT 274
 #define ASC 275
 #define DESC 276
 #define DATO_INTEGER 277
 #define DATO_DECIMAL 278
 #define DATO_VARCHAR 279
-#define TIPO_DATO 280
-#define SUMA 281
-#define RESTA 282
-#define MULT 283
-#define DIV 284
-#define IGUALDAD 285
-#define DIFERENCIA 286
-#define MAYORQ 287
-#define MENORQ 288
-#define MAYORIQ 289
-#define MENORIQ 290
+#define SUMA 280
+#define RESTA 281
+#define MULT 282
+#define DIV 283
+#define IGUALDAD 284
+#define DIFERENCIA 285
+#define MAYORQ 286
+#define MENORQ 287
+#define MAYORIQ 288
+#define MENORIQ 289
+#define ASIGNACION 290
 #define AND 291
 #define OR 292
 #define PARENTA 293
 #define PARENTC 294
 #define COMA 295
 #define PUNTOYCOMA 296
-#define ASIGNACION 297
-#define ASTERISCO 298
-#define DIGITO 299
-#define LETRA 300
-#define GUIIONES 301
-#define PUNTO 302
-#define DOSPUNTOS 303
+#define ASTERISCO 297
+#define PUNTO 298
+#define DOSPUNTOS 299
+#define DIGITO 300
+#define LETRA 301
+#define GUIIONES 302
+#define NUMERO 303
 #define CONST_ENTERO 304
 #define CONST_FLOAT 305
-#define NUMERO 306
+#define CONST_CADENA 306
 #define IDENTIFICADOR 307
-#define CONST_CADENA 308
-#define ERROR 309
+#define ERROR 308
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

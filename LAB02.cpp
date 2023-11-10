@@ -71,6 +71,9 @@
 
     #include <cstdio>
     #include <iostream>
+    #include <fstream>
+    #include <string>
+    #include <cctype>
     #include <vector>
 
     using namespace std;
@@ -82,7 +85,7 @@
     vector<int> mistakes;
     int numero_linea = 1;
 
-#line 86 "LAB02.cpp"
+#line 89 "LAB02.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -586,13 +589,13 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    36,    36,    37,    37,    38,    39,    40,    41,    42,
-      43,    44,    46,    46,    46,    47,    47,    47,    48,    48,
-      48,    48,    48,    48,    48,    49,    49,    49,    49,    52,
-      53,    54,    54,    55,    55,    56,    58,    60,    61,    62,
-      62,    64,    65,    66,    66,    66,    67,    67,    69,    70,
-      70,    72,    73,    73,    74,    74,    75,    76,    76,    76,
-      76,    77,    77,    78,    78,    79,    79,    80,    80
+       0,    39,    39,    40,    40,    41,    42,    43,    44,    45,
+      46,    47,    49,    49,    49,    50,    50,    50,    51,    51,
+      51,    51,    51,    51,    51,    52,    52,    52,    52,    55,
+      56,    57,    57,    58,    58,    59,    61,    63,    64,    65,
+      65,    67,    68,    69,    69,    69,    70,    70,    72,    73,
+      73,    75,    76,    76,    77,    77,    78,    79,    79,    79,
+      79,    80,    80,    81,    81,    82,    82,    83,    83
 };
 #endif
 
@@ -1239,49 +1242,49 @@ yyreduce:
   switch (yyn)
     {
   case 5: /* comandos: create_statement  */
-#line 38 "LAB02.y"
+#line 41 "LAB02.y"
                            { numero_linea++; }
-#line 1245 "LAB02.cpp"
+#line 1248 "LAB02.cpp"
     break;
 
   case 6: /* comandos: drop_statement  */
-#line 39 "LAB02.y"
+#line 42 "LAB02.y"
                          { numero_linea++; }
-#line 1251 "LAB02.cpp"
+#line 1254 "LAB02.cpp"
     break;
 
   case 7: /* comandos: select_statement  */
-#line 40 "LAB02.y"
+#line 43 "LAB02.y"
                            { numero_linea++; }
-#line 1257 "LAB02.cpp"
+#line 1260 "LAB02.cpp"
     break;
 
   case 8: /* comandos: insert_statement  */
-#line 41 "LAB02.y"
+#line 44 "LAB02.y"
                            { numero_linea++; }
-#line 1263 "LAB02.cpp"
+#line 1266 "LAB02.cpp"
     break;
 
   case 9: /* comandos: delete_statement  */
-#line 42 "LAB02.y"
+#line 45 "LAB02.y"
                            { numero_linea++; }
-#line 1269 "LAB02.cpp"
+#line 1272 "LAB02.cpp"
     break;
 
   case 10: /* comandos: update_statement  */
-#line 43 "LAB02.y"
+#line 46 "LAB02.y"
                            { numero_linea++; }
-#line 1275 "LAB02.cpp"
+#line 1278 "LAB02.cpp"
     break;
 
   case 11: /* comandos: error PUNTOYCOMA  */
-#line 44 "LAB02.y"
+#line 47 "LAB02.y"
                            { mistakes.push_back(numero_linea++); }
-#line 1281 "LAB02.cpp"
+#line 1284 "LAB02.cpp"
     break;
 
 
-#line 1285 "LAB02.cpp"
+#line 1288 "LAB02.cpp"
 
       default: break;
     }
@@ -1474,7 +1477,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 82 "LAB02.y"
+#line 85 "LAB02.y"
  
 
 int main(int argc, char* argv[]) {

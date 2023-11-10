@@ -1,13 +1,4 @@
-     
-
-    
-  
-    
-      
-      
-
 Incorrecto
-
 Error en la linea 2
 Error en la linea 3
 Error en la linea 5
